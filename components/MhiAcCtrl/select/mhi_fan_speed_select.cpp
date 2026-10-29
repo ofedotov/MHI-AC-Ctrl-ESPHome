@@ -16,14 +16,12 @@ void MhiFanSpeedSelect::dump_config(){
 
 void MhiFanSpeedSelect::control(const std::string &value) {
     int fan_code = 7; // Default to Auto
-    if (value == "Quiet") {
+    if (value == "Low") {
         fan_code = 0;
-    } else if (value == "Low") {
-        fan_code = 1;
     } else if (value == "Medium") {
-        fan_code = 2;
+        fan_code = 1;
     } else if (value == "High") {
-        fan_code = 6;
+        fan_code = 2;
     }
     
     this->parent_->set_fan(fan_code);
@@ -34,9 +32,9 @@ void MhiFanSpeedSelect::update_status(ACStatus status, int value) {
     if (status == status_fan) {
         std::string fan_mode_str = "Auto";
         switch (value) {
-            case 0: fan_mode_str = "Quiet"; break;
-            case 1: fan_mode_str = "Low"; break;
-            case 2: fan_mode_str = "Medium"; break;
+            case 0: fan_mode_str = "Low"; break;
+            case 1: fan_mode_str = "Medium"; break;
+            case 2:
             case 6: fan_mode_str = "High"; break;
             case 7: fan_mode_str = "Auto"; break;
         }
